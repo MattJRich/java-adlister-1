@@ -9,18 +9,17 @@
         <ul class="nav navbar-nav navbar-right">
             <%--if (request.user.getsession ! null){--%>
             <%--show logout--%>
-            <c:choose>
+            <%--<c:choose>--%>
 
-                <c:when test="${!sessionScope.user}">
-                    <li><a href="/login">Login</a></li>
-                </c:when>
+                <%--<c:when test="${!sessionScope.user}">--%>
+                    <%--<li><a href="/login">Login</a></li>--%>
+                <%--</c:when>--%>
 
-                <c:otherwise>
-                    <li><a href="/logout">Logout</a></li>
-                </c:otherwise>
+                <%--<c:otherwise>--%>
+                    <%--<li><a href="/logout">Logout</a></li>--%>
+                <%--</c:otherwise>--%>
 
-            </c:choose>
-
+            <%--</c:choose>--%>
 
             <li><a href="/logout">Logout</a></li>
         </ul>

@@ -25,7 +25,7 @@
                         <p class="card-text">Email: ${sessionScope.user.email}</p>
                         <%-- find when user was created, and create method to count number of days as a contributing member --%>
                         <p class="card-text">Member since: </p>
-                        <p class="card-text">Number of posted ads: ${sessionScope.userAds.getSize()}</p>
+                        <%--<p class="card-text">Number of posted ads: ${sessionScope.userAds.getSize()}</p>--%>
                         <%--can include number of ads posted by running query search to pull all ads from user,
                          then check the number of ads posted to each category. The number with most is most popular
                         --%>
