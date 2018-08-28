@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
@@ -39,9 +40,32 @@ public class RegisterServlet extends HttpServlet {
         User user = new User(username, email, password);
         request.getSession().setAttribute("user", user);
         try {
+            if (DaoFactory.getUsersDao().validateEmail(email) && DaoFactory.getUsersDao().validateUsername(username)) {
+                request.setAttribute("bothTaken", true);
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+                return;
+            } else if (DaoFactory.getUsersDao().validateUsername(username)) {
+                request.setAttribute("email", email);
+                request.setAttribute("usernameTaken", true);
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+                return;
+            } else if (DaoFactory.getUsersDao().validateEmail(email)) {
+                request.setAttribute("username", username);
+                request.setAttribute("emailTaken", true);
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+                return;
+            }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
             DaoFactory.getUsersDao().insert(user);
         } catch (SQLIntegrityConstraintViolationException e) {
-            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            e.printStackTrace();
         }
         response.sendRedirect("/profile");
     }
