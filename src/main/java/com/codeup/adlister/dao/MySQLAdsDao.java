@@ -12,6 +12,7 @@ import java.util.List;
 
 public class MySQLAdsDao implements Ads {
     private Connection connection = null;
+    private Config config = new Config();
 
     public MySQLAdsDao(Config config) {
         try {
@@ -70,5 +71,27 @@ public class MySQLAdsDao implements Ads {
             ads.add(extractAd(rs));
         }
         return ads;
+    }
+
+    @Override
+    public List<Ad> getUserAds(Long id) throws SQLException {
+        DriverManager.registerDriver(new Driver());
+        connection = DriverManager.getConnection(
+                config.getUrl(),
+                config.getUser(),
+                config.getPassword()
+        );
+        String query = "SELECT * FROM ads WHERE user_id = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setLong(1, id);
+
+        ResultSet rs = ps.executeQuery();
+        List<Ad> userAds = new ArrayList<>();
+        while (rs.next()) {
+            Ad ad = extractAd(rs);
+            userAds.add(ad); // inserts each add created the user made to List
+
+        }
+        return userAds;
     }
 }
