@@ -1,6 +1,7 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
 import com.codeup.adlister.util.Password;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
@@ -37,6 +40,13 @@ public class LoginServlet extends HttpServlet {
 
         if (validAttempt) {
             request.getSession().setAttribute("user", user);
+            try {
+                List<Ad> userAds = DaoFactory.getAdsDao().getUserAds(user.getId()); // List of users Ads
+                request.getSession().setAttribute("userAds", userAds);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");
