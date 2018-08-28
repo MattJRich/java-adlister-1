@@ -7,6 +7,7 @@ import java.sql.*;
 
 public class MySQLUsersDao implements Users {
     private Connection connection;
+    private Config config = new Config();
 
     public MySQLUsersDao(Config config) {
         try {
@@ -65,4 +66,45 @@ public class MySQLUsersDao implements Users {
         );
     }
 
+    @Override
+    public boolean validateUsername(String username) throws SQLException {
+        boolean usernameExist = false;
+        DriverManager.registerDriver(new Driver());
+        connection = DriverManager.getConnection(
+                config.getUrl(),
+                config.getUser(),
+                config.getPassword()
+        );
+        String query = "SELECT * FROM users WHERE username = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, username);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            if (rs.getString("username").equals(username)) {
+                usernameExist = true;
+            }
+        }
+        return usernameExist;
+    }
+
+    @Override
+    public boolean validateEmail(String email) throws SQLException {
+        boolean emailExist = false;
+        DriverManager.registerDriver(new Driver());
+        connection = DriverManager.getConnection(
+                config.getUrl(),
+                config.getUser(),
+                config.getPassword()
+        );
+        String query = "SELECT * FROM users WHERE email = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, email);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            if (rs.getString("email").equals(email)) {
+                emailExist = true;
+            }
+        }
+        return emailExist;
+    }
 }
