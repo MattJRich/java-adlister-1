@@ -22,26 +22,26 @@ public class CreateAdServlet extends HttpServlet {
                 .forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        try {
+        try {
         String[] categories = request.getParameterValues("category");
         String catString = Arrays.toString(categories);
         System.out.println(catString);
-//            String title = request.getParameter("title");
-//            String description = request.getParameter("description");
-//            User user = (User) request.getSession().getAttribute("user");
-//            long userId = user.getId();
-//            String date = DaoFactory.getAdsDao().getCurrentDate();
-//            int adId = DaoFactory.getAdsDao().insertIntoAds(userId, title, description, date);
-//            for (String category: categories) {
-//                DaoFactory.getAdsDao().insertAdCategories(adId, Long.parseLong(category));
-//            }
-//            }
-////
-//        catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            User user = (User) request.getSession().getAttribute("user");
+            long userId = user.getId();
+            String date = DaoFactory.getAdsDao().getCurrentDate();
+            int adId = DaoFactory.getAdsDao().insertIntoAds(userId, title, description, date);
+            for (String category: categories) {
+                DaoFactory.getAdsDao().insertAdCategories(adId, Long.parseLong(category));
+            }
+            }
 //
-//
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
         response.sendRedirect("/ads");
     }
 }
