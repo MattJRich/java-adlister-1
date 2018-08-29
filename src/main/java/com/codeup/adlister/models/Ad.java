@@ -7,25 +7,34 @@ public class Ad {
     private String description;
     private String username;
     private String dateMade;
+    private String catString;
 
-    public Ad(long id, long userId, String title, String description) {
+    public Ad(long id, long userId, String title, String description, String username, String dateMade, String catString) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.description = description;
+        this.username = username;
+        this.dateMade = dateMade;
+        this.catString = catString;
     }
 
-    public Ad(long userId, String title, String description) {
+    public Ad(long id, long userId, String title, String description, String dateMade, String catString) {
+        this.id = id;
+        this.dateMade = dateMade;
+        this.catString = catString;
         this.userId = userId;
         this.title = title;
         this.description = description;
     }
 
-    public Ad(long userId, String title, String description, String username) {
-        this.userId = userId;
+    public Ad(long id, String title, String description, String username, String dateMade, String catString) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.username = username;
+        this.dateMade = dateMade;
+        this.catString = catString;
     }
 
     public long getId() {
@@ -75,5 +84,13 @@ public class Ad {
 
     public void setDateMade(String dateMade) {
         this.dateMade = dateMade;
+    }
+
+    public String getCatString() {
+        return catString;
+    }
+
+    public void setCatString(String catString) {
+        this.catString = catString;
     }
 }

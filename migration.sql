@@ -31,9 +31,7 @@ CREATE TABLE categories (
 
 CREATE TABLE adCategories (
   ad_id INT UNSIGNED NOT NULL,
-  categories_id INT UNSIGNED NOT NULL,
+  category_id INT UNSIGNED NOT NULL,
   FOREIGN KEY (ad_id) REFERENCES ads(id),
-  FOREIGN KEY (categories_id) REFERENCES categories(id)
+  FOREIGN KEY (category_id) REFERENCES categories(id)
 );
-
-insert into categories (category) VALUE ('sports'),('camping'),('computers'),('phones'),('jobs'),('clothing'),('cars'),('furniture'),('other');
