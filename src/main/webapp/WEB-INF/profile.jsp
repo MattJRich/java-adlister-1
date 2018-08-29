@@ -17,7 +17,7 @@
                     <h5 class="card-title"><i class="fas fa-user-circle fa-2x"></i>Account Details:</h5>
                     <p class="card-text">Email: ${sessionScope.user.email}</p>
                     <%-- find when user was created, and create method to count number of days as a contributing member --%>
-                    <p class="card-text">Member since: </p>
+                    <p class="card-text">Member since: ${sessionScope.user.date}</p>
                     <p class="card-text">Number of posted ads:</p>
                     <%--can include number of ads posted by running query search to pull all ads from user,
                      then check the number of ads posted to each category. The number with most is most popular
@@ -33,7 +33,7 @@
                     <div class="card-body">
                         <h3>${ad.title}</h3>
                         <p class="card-text">${ad.description}</p>
-                        <p class="card-text"><small class="text-muted">posted on: </small></p>
+                        <p class="card-text"><small class="text-muted">posted on: ${ad.dateMade}</small></p>
                         <a href="#" class="btn btn-primary">Edit Ad</a>
                     </div>
                 </div>

@@ -31,16 +31,20 @@ public class MySQLAdsDao implements Ads {
     public List<Ad> all() {
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT ads.id, ads.title, ads.description, users.username FROM ads\n" +
-                    "JOIN users ON users.id = ads.user_id;");
+            stmt = connection.prepareStatement("SELECT ads.id, users.username, ads.title, ads.description, ads.dateMade, ads.catString\n" +
+                    "FROM ads\n" +
+                    "JOIN users\n" +
+                    "ON users.id = ads.user_id;");
             ResultSet rs = stmt.executeQuery();
             List<Ad> allAds = new ArrayList<>();
             while (rs.next()) {
                 Ad newAd = new Ad(
                         rs.getLong("id"),
+                        rs.getString("username"),
                         rs.getString("title"),
                         rs.getString("description"),
-                        rs.getString("username")
+                        rs.getString("dateMade"),
+                        rs.getString("catString")
                 );
                 allAds.add(newAd);
             }
@@ -72,17 +76,13 @@ public class MySQLAdsDao implements Ads {
                 rs.getLong("id"),
                 rs.getLong("user_id"),
                 rs.getString("title"),
-                rs.getString("description")
+                rs.getString("description"),
+                rs.getString("dateMade"),
+                rs.getString("catString")
         );
     }
 
-    private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
-        List<Ad> ads = new ArrayList<>();
-        while (rs.next()) {
-            ads.add(extractAd(rs));
-        }
-        return ads;
-    }
+
 
     @Override
     public List<Ad> getUserAds(Long id) throws SQLException {
@@ -117,13 +117,14 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public int insertIntoAds(long user_id, String title, String description, String date) throws SQLException {
-        String query = "INSERT INTO ads (user_id, title, description, dateMade) VALUES (? ,? ,?, ?)";
+    public int insertIntoAds(long user_id, String title, String description, String date, String categories) throws SQLException {
+        String query = "INSERT INTO ads (user_id, title, description, dateMade, catString) VALUES (? ,? ,?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         ps.setLong(1, user_id);
         ps.setString(2, title);
         ps.setString(3, description);
         ps.setString(4, date);
+        ps.setString(5, categories);
         ps.executeUpdate();
         ResultSet rs = ps.getGeneratedKeys();
         rs.next();
@@ -132,7 +133,7 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public int insertAdCategories(long ad_id, long cat_id) throws SQLException {
-        String query = "INSERT INTO adCategories (ad_id, categories_id) VALUES (? ,?)";
+        String query = "INSERT INTO adCategories (ad_id, category_id) VALUES (? ,?)";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setLong(1, ad_id);
         ps.setLong(2, cat_id);
