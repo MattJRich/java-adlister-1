@@ -8,38 +8,37 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="../index.jsp">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../index.jsp"><i class="fa fa-fw fa-home"></i> Home <span class="sr-only">(current)</span></a>
             </li>
-
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
-
+        </ul>
+        <span class="navbar-text">
+            <ul class="navbar-nav mr-auto">
             <c:choose>
                 <c:when test="${sessionScope.user != null}">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/logout">Logout <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/logout"> Logout <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/edit">Edit Profile <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/profile/edit"> Edit Profile <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/ads/create">Create Ad <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/ads/create"> Create Ad <span class="sr-only">(current)</span></a>
                     </li>
                 </c:when>
-
                 <c:otherwise>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/login"><i class="fa fa-fw fa-user"></i> Login <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/register">Register <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/register"> Register <span class="sr-only">(current)</span></a>
                     </li>
                 </c:otherwise>
-
             </c:choose>
-        </ul>
+            </ul>
+        </span>
     </div>
-
 </nav>
