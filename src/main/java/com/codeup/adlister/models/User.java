@@ -23,6 +23,15 @@ public class User {
         this.password = password;
     }
 
+    public User(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
+
     public long getId() {
         return id;
     }
@@ -34,6 +43,8 @@ public class User {
     public String getUsername() {
         return username;
     }
+
+//    public String newUsername() {return username;}
 
     public void setUsername(String username) {
         this.username = username;
