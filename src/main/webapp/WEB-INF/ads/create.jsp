@@ -19,21 +19,23 @@
         </div>
         <input type="submit" class="btn btn-block btn-primary">
         Sports
-        <input type="checkbox" name="category" value="1">
+        <input type="checkbox" name="category" value="Sports1">
         Camping
-        <input type="checkbox" name="category" value="2">
+        <input type="checkbox" name="category" value="Camping2">
         Computers
-        <input type="checkbox" name="category" value="3">
+        <input type="checkbox" name="category" value="Computers3">
         Phones
-        <input type="checkbox" name="category" value="4">
+        <input type="checkbox" name="category" value="Phones4">
         Jobs
-        <input type="checkbox" name="category" value="5">
+        <input type="checkbox" name="category" value="Job5s">
         Clothing
-        <input type="checkbox" name="category" value="6">
+        <input type="checkbox" name="category" value="Clothing6">
         Cars
-        <input type="checkbox" name="category" value="7">
+        <input type="checkbox" name="category" value="Cars7">
         Furniture
-        <input type="checkbox" name="category" value="8">
+        <input type="checkbox" name="category" value="Furniture8">
+        Other
+        <input type="checkbox" name="category" value="Other9">
     </form>
 </div>
 </body>

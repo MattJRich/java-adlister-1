@@ -19,9 +19,12 @@
     <%--<p>${ad.username}</p>--%>
     <%--</div>--%>
     <%--</c:forEach>--%>
-    <c:forEach var="category" items="${categories}">
+    <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
-            <p>${category}</p>
+            <h2>${ad.title}</h2>
+            <p>${ad.description}</p>
+            <p>Created On: ${ad.dateMade}</p>
+            <p>Categories: ${ad.catString}</p>
         </div>
     </c:forEach>
 </div>
