@@ -18,9 +18,9 @@ public class MySQLAdsDao implements Ads {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                config.getUrl(),
-                config.getUser(),
-                config.getPassword()
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -69,10 +69,10 @@ public class MySQLAdsDao implements Ads {
 
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
-            rs.getLong("id"),
-            rs.getLong("user_id"),
-            rs.getString("title"),
-            rs.getString("description")
+                rs.getLong("id"),
+                rs.getLong("user_id"),
+                rs.getString("title"),
+                rs.getString("description")
         );
     }
 
@@ -86,6 +86,12 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> getUserAds(Long id) throws SQLException {
+        DriverManager.registerDriver(new Driver());
+        connection = DriverManager.getConnection(
+                config.getUrl(),
+                config.getUser(),
+                config.getPassword()
+        );
         String query = "SELECT * FROM ads WHERE user_id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setLong(1, id);
@@ -98,5 +104,38 @@ public class MySQLAdsDao implements Ads {
 
         }
         return userAds;
+    }
+
+
+    @Override
+    public String getCurrentDate() throws SQLException {
+        String query =  "SELECT CURRENT_DATE AS date";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        return rs.getString("date");
+    }
+
+    @Override
+    public int insertIntoAds(long user_id, String title, String description, String date) throws SQLException {
+        String query = "INSERT INTO ads (user_id, title, description, dateMade) VALUES (? ,? ,?, ?)";
+        PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        ps.setLong(1, user_id);
+        ps.setString(2, title);
+        ps.setString(3, description);
+        ps.setString(4, date);
+        ps.executeUpdate();
+        ResultSet rs = ps.getGeneratedKeys();
+        rs.next();
+        return rs.getInt(1);
+    }
+
+    @Override
+    public int insertAdCategories(long ad_id, long cat_id) throws SQLException {
+        String query = "INSERT INTO adCategories (ad_id, categories_id) VALUES (? ,?)";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setLong(1, ad_id);
+        ps.setLong(2, cat_id);
+        return ps.executeUpdate();
     }
 }

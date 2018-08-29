@@ -12,4 +12,14 @@ public interface Ads {
     Long insert(Ad ad);
     // list Ad Objects User made
     List<Ad> getUserAds(Long id) throws SQLException;
+
+    int insertIntoAds(long user_id, String title, String description, String date) throws SQLException;
+
+    String getCurrentDate() throws SQLException;
+
+    int insertAdCategories(long ad_id, long cat_id) throws SQLException;
+
+
+
+
 }

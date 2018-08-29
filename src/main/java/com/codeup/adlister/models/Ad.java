@@ -6,6 +6,7 @@ public class Ad {
     private String title;
     private String description;
     private String username;
+    private String dateMade;
 
     public Ad(long id, long userId, String title, String description) {
         this.id = id;
@@ -66,5 +67,13 @@ public class Ad {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getDateMade() {
+        return dateMade;
+    }
+
+    public void setDateMade(String dateMade) {
+        this.dateMade = dateMade;
     }
 }
