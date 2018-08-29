@@ -54,6 +54,41 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    public int updateUsername(String username, long id) throws SQLIntegrityConstraintViolationException {
+        String query = "UPDATE users SET username = ? WHERE id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, username);
+            ps.setLong(2, id);
+
+            return ps.executeUpdate();
+
+        }catch (SQLIntegrityConstraintViolationException myError) {
+            throw new SQLIntegrityConstraintViolationException("error at SQL Integerity of updateUser method");
+        } catch (SQLException e) {
+            throw new RuntimeException("error on SQL Exception of updateUser method");
+        }
+    }
+
+
+    public int updateEmail(String email, long id) throws SQLIntegrityConstraintViolationException {
+        String query = "UPDATE users SET email = ? WHERE id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, email);
+            ps.setLong(2, id);
+
+            return ps.executeUpdate();
+
+        }catch (SQLIntegrityConstraintViolationException myError) {
+            throw new SQLIntegrityConstraintViolationException("error at SQL of updateUser method");
+        } catch (SQLException e) {
+            throw new RuntimeException("error on SQL Exception of updateEmail method");
+        }
+    }
+
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {
             return null;
