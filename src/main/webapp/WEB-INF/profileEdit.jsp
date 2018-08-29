@@ -32,43 +32,54 @@
             <p style="color:green;">Email change successful!</p>
         </c:if>
 
-        <form action="/profile/edit" method="post">
-            <div class="form-group w-50">
-                <label for="username">Username: ${sessionScope.user.username} </label>
-                <input id="username" name="username" class="form-control" type="text" pattern="[A-Za-z0-9].{1, }" placeholder="${sessionScope.user.username}">
-            </div>
-            <input type="submit" class="btn btn-primary btn-block w-50">
-        </form>
-        <%--update email--%>
-        <form action="/profile/edit" method="post">
-            <div class="form-group w-50">
-                <label for="email">Email: ${sessionScope.user.email} </label>
-                <input id="email" name="email" class="form-control" type="text" pattern="[A-Za-z0-9].{1, }" placeholder="${sessionScope.user.email}">
-            </div>
-            <input type="submit" class="btn btn-primary btn-block w-50">
-        </form>
-
-        <%--update password--%>
-        <h3> update password</h3>
-        <form action="/profile/edit" method="post" >
-            <div class="form-group w-50">
-                <label for="password">Verify Current Password</label>
-                <input id="password" name="password" class="form-control" type="password">
-            </div>
-            <div class="form-group">
-                <label for="new_password">New Password</label>
-                <input id="new_password" name="new_password" class="form-control w-50" type="password" required>
-            </div>
-            <div class="form-group">
-                <label for="confirm_new_password">New Password</label>
-                <input id="confirm_new_password" name="confirm_new_password" class="form-control w-50" type="password" required>
-            </div>
-            <input type="submit" class="btn btn-primary btn-block w-50">
-        </form>
-
-        <button></button>
+        <%--update profile info form--%>
 
 
+            <form action="/profile/edit" method="post">
+                <div class="form-group w-50">
+                    <label for="username">Username: ${sessionScope.user.username} </label>
+                    <input id="username" name="username" class="form-control" type="text" pattern="[A-Za-z0-9].{1, }" placeholder="${sessionScope.user.username}">
+                </div>
+                <input type="submit" class="btn btn-primary btn-block w-50">
+            </form>
+            <form action="/profile/edit" method="post">
+                <div class="form-group w-50">
+                    <label for="email">Email: ${sessionScope.user.email} </label>
+                    <input id="email" name="email" class="form-control" type="text" pattern="[A-Za-z0-9].{1, }" placeholder="${sessionScope.user.email}">
+                </div>
+                <input type="submit" class="btn btn-primary btn-block w-50">
+            </form>
+
+
+
+                <%--update password form--%>
+                <h3>update password</h3>
+                <form action="/profile/edit" method="POST" >
+                    <div class="form-group w-50">
+                        <label for="password">Verify Current Password</label>
+                        <input id="password" name="password" class="form-control" type="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password">New Password</label>
+                        <input id="new_password" name="new_password" class="form-control w-50" type="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_new_password">New Password</label>
+                        <input id="confirm_new_password" name="confirm_new_password" class="form-control w-50" type="password" required>
+                    </div>
+                    <input type="submit" class="btn btn-primary btn-block w-50">
+                </form>
+            </div>
+
+            <h3>Where would you like to go next?</h3>
+            <form action="/profile" method="GET">
+                <button class="btn btn-primary" type="submit">View Profile</button>
+            </form>
+            <form action="/ads" method="GET">
+                <button class="btn btn-primary" type="submit">View All Ads</button>
+            </form>
+
+        <jsp:include page="partials/js-script.jsp" />
     </div>
 </body>
 </html>
