@@ -42,8 +42,8 @@
             </div>
         </div>
 
-        <form class="row pt-4" action="/auto" method="GET">
-            <a href="/auto">Auto</a>
+        <form class="row pt-4" action="/category" method="GET">
+            <a href="/category">Auto</a>
         </form>
         <div class="row pt-1">
             <div class="col-4">
@@ -57,8 +57,8 @@
             </div>
         </div>
 
-        <form class="row pt-4" action="/electronics" method="GET">
-            <a href="/electronics">Electronics</a>
+        <form class="row pt-4" action="/category" method="GET">
+            <a href="/category">Electronics</a>
         </form>
         <div class="row pt-1">
             <div class="col-4">
@@ -81,11 +81,15 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/ads">Recent</a>
-                        <a class="dropdown-item" href="/auto">Auto</a>
-                        <a class="dropdown-item" href="/electronics">Electronics</a>
-                        <a class="dropdown-item" href="/jobs">Jobs</a>
-                        <a class="dropdown-item" href="/outdoors">Outdoors</a>
-                        <a class="dropdown-item" href="/services">Services</a>
+                        <a class="dropdown-item" href="/category">Sports</a>
+                        <a class="dropdown-item" href="/category">Camping</a>
+                        <a class="dropdown-item" href="/category">Computers</a>
+                        <a class="dropdown-item" href="/category">Phones</a>
+                        <a class="dropdown-item" href="/category">Jobs</a>
+                        <a class="dropdown-item" href="/category">Clothing</a>
+                        <a class="dropdown-item" href="/category">Cars</a>
+                        <a class="dropdown-item" href="/category">Furniture</a>
+                        <a class="dropdown-item" href="/category">Other</a>
                     </div>
                 </li>
                 <li class="nav-item">

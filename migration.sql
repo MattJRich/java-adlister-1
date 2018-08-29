@@ -1,3 +1,4 @@
+
 CREATE TABLE users (
   id INT UNSIGNED AUTO_INCREMENT,
   email VARCHAR(100) NOT NULL,
@@ -28,13 +29,9 @@ CREATE TABLE categories (
   UNIQUE (category)
 );
 
-
-
 CREATE TABLE adCategories (
   ad_id INT UNSIGNED NOT NULL,
   category_id INT UNSIGNED NOT NULL,
   FOREIGN KEY (ad_id) REFERENCES ads(id),
   FOREIGN KEY (category_id) REFERENCES categories(id)
 );
-
-insert into categories (category) VALUE ('sports'),('camping'),('computers'),('phones'),('jobs'),('clothing'),('cars'),('furniture'),('other')
