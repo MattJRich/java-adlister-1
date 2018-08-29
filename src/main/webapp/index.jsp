@@ -11,8 +11,8 @@
     <div class="container">
         <div class="row pt-4">
             <div class="col-7">
-                <h1>Buy, sell, create Ads & Make $</h1>
-                <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolores earum eius illo itaque iure, iusto labore laborum</h2>
+                <h1 style="font-size:5vw;">Buy, sell, create Ads & Make $</h1>
+                <h4 style="font-size:3vw;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolores earum eius illo itaque iure, iusto labore laborum</h4>
             </div>
             <div class="col-5">
                 <div class="card">
@@ -26,10 +26,10 @@
                 </div>
             </div>
         </div>
-
         <form class="row pt-" action="/ads" method="GET">
             <a href="/ads">View all recent</a>
         </form>
+
         <div class="row pt-1">
             <div class="col-4">
                 <img style="height: 200px" class="d-block w-100" src="http://media.caranddriver.com/images/17q4/692996/2019-mclaren-senna-hypercar-official-photos-and-info-news-car-and-driver-photo-698055-s-original.jpg" alt="First slide">
@@ -72,6 +72,9 @@
             </div>
         </div>
 
+        <%-- ALL OTHER PAGES NEED THIS TAG--%>
+        <jsp:include page="WEB-INF/partials/js-script.jsp" />
+
         <footer class="pt-4 pb-4">
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item dropdown">
@@ -79,7 +82,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/ads">Recent</a>
                         <a class="dropdown-item" href="/auto">Auto</a>
-                        <a class="dropdown-item" href="/elec">Electronics</a>
+                        <a class="dropdown-item" href="/electronics">Electronics</a>
                         <a class="dropdown-item" href="/jobs">Jobs</a>
                         <a class="dropdown-item" href="/outdoors">Outdoors</a>
                         <a class="dropdown-item" href="/services">Services</a>
@@ -94,29 +97,5 @@
             </ul>
         </footer>
     </div>
-    <!-- Optional JavaScript -->
-    <script>
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("myBtn").style.display = "block";
-            } else {
-                document.getElementById("myBtn").style.display = "none";
-            }
-        }
-
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
 </body>
 </html>

@@ -86,12 +86,6 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> getUserAds(Long id) throws SQLException {
-        DriverManager.registerDriver(new Driver());
-        connection = DriverManager.getConnection(
-                config.getUrl(),
-                config.getUser(),
-                config.getPassword()
-        );
         String query = "SELECT * FROM ads WHERE user_id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setLong(1, id);
