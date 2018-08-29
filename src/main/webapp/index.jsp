@@ -30,12 +30,6 @@
             <a href="/ads">View all recent</a>
         </form>
 
-        <section class="card">
-            <div class="card--content"></div>
-            <div class="card--content"></div>
-            <div class="card--content"></div>
-        </section>
-
         <div class="row pt-1">
             <div class="col-4">
                 <img style="height: 200px" class="d-block w-100" src="http://media.caranddriver.com/images/17q4/692996/2019-mclaren-senna-hypercar-official-photos-and-info-news-car-and-driver-photo-698055-s-original.jpg" alt="First slide">
@@ -78,7 +72,7 @@
             </div>
         </div>
 
-        // ALL OTHER PAGES NEED THIS TAG
+        <%-- ALL OTHER PAGES NEED THIS TAG--%>
         <jsp:include page="WEB-INF/partials/js-script.jsp" />
 
         <footer class="pt-4 pb-4">

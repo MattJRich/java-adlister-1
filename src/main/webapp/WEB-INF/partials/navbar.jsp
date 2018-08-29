@@ -19,14 +19,14 @@
             <ul class="navbar-nav mr-auto">
             <c:choose>
                 <c:when test="${sessionScope.user != null}">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/logout"> Logout <span class="sr-only">(current)</span></a>
+                     <li class="nav-item active">
+                        <a class="nav-link" href="/ads/create"><i class="fab fa-buysellads"></i> Create Ad <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/profile/edit"> Edit Profile <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/profile/edit"><i class="fa fa-edit"></i> Edit Profile <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/ads/create"> Create Ad <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout <span class="sr-only">(current)</span></a>
                     </li>
                 </c:when>
                 <c:otherwise>
@@ -34,7 +34,7 @@
                         <a class="nav-link" href="/login"><i class="fa fa-fw fa-user"></i> Login <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/register"> Register <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/register"><i class="fa fa-list" aria-hidden="true"></i> Register <span class="sr-only">(current)</span></a>
                     </li>
                 </c:otherwise>
             </c:choose>
