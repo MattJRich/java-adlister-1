@@ -35,9 +35,11 @@
                         <p class="card-text">${ad.description}</p>
                         <p class="card-text"><small class="text-muted">posted on: ${ad.dateMade}</small></p>
                         <p class="card-text"><small class="text-muted">categories: ${ad.catString}</small></p>
-                        <a href="#" class="btn btn-primary">Edit Ad</a>
                     </div>
+                    <button><a href="/editAd?adId=${ad.id}">Edit Ad</a></button>
                 </div>
+
+
             </c:forEach>
         </div>
     </div>

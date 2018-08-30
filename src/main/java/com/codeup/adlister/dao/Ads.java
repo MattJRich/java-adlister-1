@@ -21,6 +21,10 @@ public interface Ads {
 
     int insertAdCategories(long ad_id, long cat_id) throws SQLException;
 
+    Ad createAdObject(long ad_id) throws SQLException;
+
+    int updateAd(String title, String description, long ad_id) throws SQLException;
+
 
 
 
