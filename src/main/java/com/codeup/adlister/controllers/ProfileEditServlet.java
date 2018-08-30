@@ -53,7 +53,6 @@ public class ProfileEditServlet extends HttpServlet {
                         request.getSession().setAttribute("user", newUser);
                         request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
                     }
-
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
