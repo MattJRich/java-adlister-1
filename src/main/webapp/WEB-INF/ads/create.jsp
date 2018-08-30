@@ -17,25 +17,45 @@
             <label for="description">Description</label>
             <textarea id="description" name="description" class="form-control" type="text"></textarea>
         </div>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="category" type="checkbox" id="sports1" value="Sports1">
+            <label class="form-check-label" for="sports1">Sports</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="category" type="checkbox" id="camping2" value="Camping2">
+            <label class="form-check-label" for="camping2">Camping</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="category" type="checkbox" id="computers3" value="Computers3">
+            <label class="form-check-label" for="computers3">Computers</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="category" type="checkbox" id="phones4" value="Phones4">
+            <label class="form-check-label" for="phones4">Phones</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="category" type="checkbox" id="jobs5" value="Jobs5">
+            <label class="form-check-label" for="jobs5">Jobs</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="category" type="checkbox" id="clothing6" value="Clothing6">
+            <label class="form-check-label" for="clothing6">Clothing</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="category" type="checkbox" id="cars7" value="Cars7">
+            <label class="form-check-label" for="cars7">Cars</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="category" type="checkbox" id="furniture8" value="Furniture8">
+            <label class="form-check-label" for="furniture8">Furniture</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="category" type="checkbox" id="other9" value="Other9">
+            <label class="form-check-label" for="other9">Other</label>
+        </div>
+
         <input type="submit" class="btn btn-block btn-primary">
-        Sports
-        <input type="checkbox" name="category" value="Sports1">
-        Camping
-        <input type="checkbox" name="category" value="Camping2">
-        Computers
-        <input type="checkbox" name="category" value="Computers3">
-        Phones
-        <input type="checkbox" name="category" value="Phones4">
-        Jobs
-        <input type="checkbox" name="category" value="Job5s">
-        Clothing
-        <input type="checkbox" name="category" value="Clothing6">
-        Cars
-        <input type="checkbox" name="category" value="Cars7">
-        Furniture
-        <input type="checkbox" name="category" value="Furniture8">
-        Other
-        <input type="checkbox" name="category" value="Other9">
     </form>
 </div>
 </body>

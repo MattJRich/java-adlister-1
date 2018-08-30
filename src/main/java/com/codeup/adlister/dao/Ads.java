@@ -8,6 +8,8 @@ import java.util.List;
 public interface Ads {
     // get a list of all the ads
     List<Ad> all();
+    // Select on Category id
+    List<Ad> selWhile(Long catId);
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
     // list Ad Objects User made
