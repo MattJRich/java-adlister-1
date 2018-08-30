@@ -10,6 +10,8 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
+    <h1>${ad.title}</h1>
+    <p>${ad.description}</p>
 
 </body>
 </html>
