@@ -15,12 +15,15 @@ import java.util.List;
 public class HelloWorldServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //response.getWriter().println("<h1>Hello, World!</h1>");
-        List<Ad> all = DaoFactory.getAdsDao().all();
-        for (Ad ad: all) {
-            System.out.println(ad.getTitle());
-        }
 
+        // List all ads
         request.setAttribute("all", DaoFactory.getAdsDao().all());
+
+        // List Cars ads
+        request.setAttribute("cars", DaoFactory.getAdsDao().selWhile((long) 7));
+
+        // List Computers ads
+        request.setAttribute("computers", DaoFactory.getAdsDao().selWhile((long) 3));
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }
