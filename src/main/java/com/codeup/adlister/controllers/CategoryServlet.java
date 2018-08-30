@@ -29,94 +29,67 @@ public class CategoryServlet extends HttpServlet {
                 // System.out.println(info.getCatString());
                 if(info.getCatString().toLowerCase().contains("sports")){
                     sortedAd.add(info.getTitle());
-
                     request.setAttribute("catAd", DaoFactory.getAdsDao().selWhile((long) 1));
-                    System.out.println(info.getDescription());
                 }
             }
 
             if ("2".equalsIgnoreCase(category)) {
-                // System.out.println(info.getCatString());
                 if(info.getCatString().toLowerCase().contains("camping")){
                     sortedAd.add(info.getTitle());
-
                     request.setAttribute("catAd", DaoFactory.getAdsDao().selWhile((long) 2));
-                    System.out.println(info.getDescription());
                 }
             }
 
             if ("3".equalsIgnoreCase(category)) {
-                // System.out.println(info.getCatString());
                 if(info.getCatString().toLowerCase().contains("computers")){
                     sortedAd.add(info.getTitle());
-
                     request.setAttribute("catAd", DaoFactory.getAdsDao().selWhile((long) 3));
-                    System.out.println(info.getDescription());
                 }
             }
 
             if ("4".equalsIgnoreCase(category)) {
-                // System.out.println(info.getCatString());
                 if(info.getCatString().toLowerCase().contains("phones")){
                     sortedAd.add(info.getTitle());
-
                     request.setAttribute("catAd", DaoFactory.getAdsDao().selWhile((long) 4));
-                    System.out.println(info.getDescription());
                 }
             }
 
             if ("5".equalsIgnoreCase(category)) {
-                // System.out.println(info.getCatString());
                 if(info.getCatString().toLowerCase().contains("jobs")){
                     sortedAd.add(info.getTitle());
-
                     request.setAttribute("catAd", DaoFactory.getAdsDao().selWhile((long) 5));
-                    System.out.println(info.getDescription());
                 }
             }
 
             if ("6".equalsIgnoreCase(category)) {
-                // System.out.println(info.getCatString());
                 if(info.getCatString().toLowerCase().contains("clothing")){
                     sortedAd.add(info.getTitle());
-
                     request.setAttribute("catAd", DaoFactory.getAdsDao().selWhile((long) 6));
-                    System.out.println(info.getDescription());
                 }
             }
 
             if ("7".equalsIgnoreCase(category)) {
-                // System.out.println(info.getCatString());
                 if(info.getCatString().toLowerCase().contains("cars")){
                     sortedAd.add(info.getTitle());
-
                     request.setAttribute("catAd", DaoFactory.getAdsDao().selWhile((long) 7));
-                    System.out.println(info.getDescription());
                 }
             }
 
             if ("8".equalsIgnoreCase(category)) {
-                // System.out.println(info.getCatString());
                 if(info.getCatString().toLowerCase().contains("furniture")){
                     sortedAd.add(info.getTitle());
-
                     request.setAttribute("catAd", DaoFactory.getAdsDao().selWhile((long) 8));
-                    System.out.println(info.getDescription());
                 }
             }
 
             if ("9".equalsIgnoreCase(category)) {
-                // System.out.println(info.getCatString());
                 if(info.getCatString().toLowerCase().contains("other")){
                     sortedAd.add(info.getTitle());
-
                     request.setAttribute("catAd", DaoFactory.getAdsDao().selWhile((long) 9));
-                    System.out.println(info.getDescription());
                 }
             }
         }
 
         request.getRequestDispatcher("/WEB-INF/ads/category.jsp").forward(request, response);
-
     }
 }
