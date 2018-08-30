@@ -38,7 +38,7 @@ public class Ad {
         this.catString = catString;
     }
 
-    public Ad(long id, long userId, String username, String title, String description, String dateMade, String catString, long category_id) {
+    public Ad(long id, long userId, String title, String description, String username, String dateMade, String catString, long category_id) {
         this.id = id;
         this.userId = userId;
         this.username = username;
