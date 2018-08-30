@@ -59,7 +59,6 @@ public class User {
         this.password = Password.hash(password);
     }
 
-
     public String getDate() {
         return date;
     }
