@@ -1,6 +1,7 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Password;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
@@ -66,7 +67,7 @@ public class MySQLUsersDao implements Users {
         );
     }
 
-    public int updateUsername(String username, long id) throws SQLIntegrityConstraintViolationException {
+    public int updateUsername(String username, long id) {
         String query = "UPDATE users SET username = ? WHERE id = ?";
 
         try {
@@ -76,8 +77,6 @@ public class MySQLUsersDao implements Users {
 
             return ps.executeUpdate();
 
-        }catch (SQLIntegrityConstraintViolationException myError) {
-            throw new SQLIntegrityConstraintViolationException("error at SQL Integerity of updateUser method");
         } catch (SQLException e) {
             throw new RuntimeException("error on SQL Exception of updateUser method");
         }
@@ -100,6 +99,23 @@ public class MySQLUsersDao implements Users {
             throw new RuntimeException("error on SQL Exception of updateEmail method");
         }
     }
+
+    // being throw 500 error at last point
+    public int updatePassword (String password, long id) throws SQLIntegrityConstraintViolationException {
+        String query = "UPDATE users SET password = ? WHERE id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, password);
+            ps.setLong(2, id);
+            return ps.executeUpdate();
+
+        } catch (SQLException e) {
+//            System.out.println(password + id);
+            throw new RuntimeException("error on SQL Exception of updatePassword method");
+        }
+    }
+
 
     @Override
     public boolean validateUsername(String username) throws SQLException {
@@ -143,7 +159,22 @@ public class MySQLUsersDao implements Users {
         return emailExist;
     }
 
+    // we already have password check in password util... do we even need this?
+    @Override
+    public boolean validatePassword(String password) throws SQLException {
+         boolean passwordCorrect = false;
+         String query = "SELECT * FROM users WHERE password = ?";
 
-
-
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, password);
+            ResultSet rs = ps.executeQuery();
+           while (rs.next()) {
+               System.out.println("this is password in while loop: " + password);
+               System.out.println("passwordCorrect: " + passwordCorrect);
+               if (rs.getString("password").equals(password)) {
+                   passwordCorrect = true;
+               }
+           }
+            return passwordCorrect;
+        }
 }

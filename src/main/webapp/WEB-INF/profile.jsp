@@ -34,6 +34,7 @@
                         <h3>${ad.title}</h3>
                         <p class="card-text">${ad.description}</p>
                         <p class="card-text"><small class="text-muted">posted on: ${ad.dateMade}</small></p>
+                        <p class="card-text"><small class="text-muted">categories: ${ad.catString}</small></p>
                         <a href="#" class="btn btn-primary">Edit Ad</a>
                     </div>
                 </div>

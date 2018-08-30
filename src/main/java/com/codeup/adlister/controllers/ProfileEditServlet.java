@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Password;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,42 +26,43 @@ public class ProfileEditServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        // ================== vars for user profile ================== \\
         String username = request.getParameter("username");
         String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String newPassword = request.getParameter("newPassword");
+        String confirmNewPassword = request.getParameter("confirmNewPassword");
 
-        User user =  (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         long id = user.getId();
+        String currentPassword = user.getPassword();
+        String currentUsername = user.getUsername();
 
-        System.out.println(username);
-        System.out.println(email);
+        // ================== username update logic ================== \\
+            if (email == null) {
+                try {
+                    boolean usernameNotValid = DaoFactory.getUsersDao().validateUsername(username);
+                    if (usernameNotValid) {
+                        request.setAttribute("usernameTaken", true);
+                        request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
+                    } else {
+                        request.setAttribute("usernameTaken", false);
+                        System.out.println(DaoFactory.getUsersDao().updateUsername(username, id));
+                        request.getSession().removeAttribute("user");
+                        User newUser = DaoFactory.getUsersDao().findByUsername(username);
+                        request.getSession().setAttribute("user", newUser);
+                        request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
+                    }
 
-        if (email == null ) {
-            try {
-                boolean usernameNotValid = DaoFactory.getUsersDao().validateUsername(username);
-                if (usernameNotValid) {
-                    request.setAttribute("usernameTaken", true);
-                    request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("usernameTaken", false);
-                    System.out.println(DaoFactory.getUsersDao().updateUsername(username, id));
-                    request.getSession().removeAttribute("user");
-                    User newUser = DaoFactory.getUsersDao().findByUsername(username);
-                    request.getSession().setAttribute("user", newUser);
-                    request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-
-            } catch (SQLIntegrityConstraintViolationException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
 
-        }
-
-        if (username == null) {
-            try {
-                boolean userEmailNotValid = DaoFactory.getUsersDao().validateEmail(email);
+        // ================== email update logic ================== \\
+            if (username == null) {
+                try {
+                    boolean userEmailNotValid = DaoFactory.getUsersDao().validateEmail(email);
                     if (userEmailNotValid) {
                         request.setAttribute("emailTaken", true);
                         request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
@@ -68,59 +70,50 @@ public class ProfileEditServlet extends HttpServlet {
                     } else {
                         request.setAttribute("emailTaken", false);
                         System.out.println(DaoFactory.getUsersDao().updateEmail(email, id));
-                        User currentUser = (User) request.getSession().getAttribute("user");
-                        String currentUsername = currentUser.getUsername();
                         User newUser = DaoFactory.getUsersDao().findByUsername(currentUsername);
                         request.getSession().removeAttribute("user");
                         request.getSession().setAttribute("user", newUser);
                         request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
-
                     }
-
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 
+        // ================== password update logic ================== \\
+        if (username == null && email == null) {
+            if (Password.check(password, currentPassword)) {
+                request.setAttribute("passwordsMatch", true);
 
-        }
+                if (!newPassword.equals(confirmNewPassword)) {
+                    request.setAttribute("newPasswordMatch", false);
+                    request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
+                    System.out.println("DOESNT MATCH");
+                } else {
 
+                    try {
+                        System.out.println(" new password to before hash: " + newPassword);
+                        request.setAttribute("passwordChangeSuccess", true);
+                        String newPasswordHash = Password.hash(newPassword);
+                        DaoFactory.getUsersDao().updatePassword(newPasswordHash, id);
+                        request.getSession().removeAttribute("user");
+                        User newUser = DaoFactory.getUsersDao().findByUsername(currentUsername);
+                        request.getSession().setAttribute("user", newUser);
+                        request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
 
+                    } catch (SQLIntegrityConstraintViolationException e) {
+                        e.printStackTrace();
+                    }
+                }
 
-
-
-        request.getSession().setAttribute("user", user);
-
-        try {
-            if (DaoFactory.getUsersDao().validateEmail(email) && DaoFactory.getUsersDao().validateUsername(username)) {
-                request.setAttribute("bothTaken", true);
-                return;
-
-            } else if (DaoFactory.getUsersDao().validateUsername(username)) {
-                request.setAttribute("email", email);
-                request.setAttribute("usernameTaken", true);
+            } else {
+                request.setAttribute("passwordsMatch", false);
                 request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
-                return;
-
-            } else if (DaoFactory.getUsersDao().validateEmail(email)) {
-                request.setAttribute("username", username);
-                request.setAttribute("emailTaken", true);
-                request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
-                return;
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
-//        try {
-//            DaoFactory.getUsersDao().updateUser(user);
-//        } catch (SQLIntegrityConstraintViolationException e) {
-//            e.printStackTrace();
-//        }
-
     }
 }
+
 
 
 
