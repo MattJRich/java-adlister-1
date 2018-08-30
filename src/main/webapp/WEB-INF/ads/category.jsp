@@ -40,7 +40,7 @@
                             <div style="border: 1px solid grey; display: block; float: left; width: 30%; margin-right: 10px; height: 220px;" class="col-md-4">
                                 <h2>${ad.title}</h2>
                                 <p>${ad.description}</p>
-                                <p>Created On: ${ad.dateMade}</p>
+                                <p>Created On: ${ad.dateMade} by ${ad.username}</p>
                                 <p>Categories: ${ad.catString}</p>
                             </div>
                             </a>

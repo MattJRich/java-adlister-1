@@ -22,6 +22,7 @@ public class viewAdServlet extends HttpServlet {
         try {
             Ad ad = DaoFactory.getAdsDao().createAdObject(adId);
             request.setAttribute("ad", ad);
+            request.getRequestDispatcher("/WEB-INF/ads/viewAd.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
         }
