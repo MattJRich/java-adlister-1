@@ -29,6 +29,10 @@ public class Ad {
         this.description = description;
     }
 
+
+
+
+
     public Ad(long id, String title, String description, String username, String dateMade, String catString) {
         this.id = id;
         this.title = title;
@@ -37,6 +41,8 @@ public class Ad {
         this.dateMade = dateMade;
         this.catString = catString;
     }
+
+
 
     public Ad(long id, long userId, String title, String description, String username, String dateMade, String catString, long category_id) {
         this.id = id;

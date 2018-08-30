@@ -175,16 +175,19 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Ad createAdObject(long ad_id) throws SQLException {
-        String query = "SELECT * FROM ads WHERE id = ?";
+        String query = "SELECT *, users.username FROM ads\n" +
+                "JOIN users\n" +
+                "ON users.id = ads.user_id\n" +
+                "WHERE ads.id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setLong(1, ad_id);
         ResultSet rs = ps.executeQuery();
         rs.next();
         Ad newAd = new Ad(
                 rs.getLong("id"),
-                rs.getLong("user_id"),
                 rs.getString("title"),
                 rs.getString("description"),
+                rs.getString("username"),
                 rs.getString("dateMade"),
                 rs.getString("catString")
         );
