@@ -43,7 +43,7 @@
         </div>
 
         <form class="row pt-4" action="/category" method="GET">
-            <a href="/category">Auto</a>
+            <a href="/category?value=7">Cars</a>
         </form>
         <div class="row pt-1">
             <div class="col-4">
@@ -58,7 +58,7 @@
         </div>
 
         <form class="row pt-4" action="/category" method="GET">
-            <a href="/category">Electronics</a>
+            <a href="/category?value=3">Computers</a>
         </form>
         <div class="row pt-1">
             <div class="col-4">
@@ -81,15 +81,15 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/ads">Recent</a>
-                        <a class="dropdown-item" href="/category">Sports</a>
-                        <a class="dropdown-item" href="/category">Camping</a>
-                        <a class="dropdown-item" href="/category">Computers</a>
-                        <a class="dropdown-item" href="/category">Phones</a>
-                        <a class="dropdown-item" href="/category">Jobs</a>
-                        <a class="dropdown-item" href="/category">Clothing</a>
-                        <a class="dropdown-item" href="/category">Cars</a>
-                        <a class="dropdown-item" href="/category">Furniture</a>
-                        <a class="dropdown-item" href="/category">Other</a>
+                        <a class="dropdown-item" href="/category?value=1">Sports</a>
+                        <a class="dropdown-item" href="/category?value=2">Camping</a>
+                        <a class="dropdown-item" href="/category?value=3">Computers</a>
+                        <a class="dropdown-item" href="/category?value=4">Phones</a>
+                        <a class="dropdown-item" href="/category?value=5">Jobs</a>
+                        <a class="dropdown-item" href="/category?value=6">Clothing</a>
+                        <a class="dropdown-item" href="/category?value=7">Cars</a>
+                        <a class="dropdown-item" href="/category?value=8">Furniture</a>
+                        <a class="dropdown-item" href="/category?value=9">Other</a>
                     </div>
                 </li>
                 <li class="nav-item">

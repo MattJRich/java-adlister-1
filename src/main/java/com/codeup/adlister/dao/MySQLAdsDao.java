@@ -31,7 +31,7 @@ public class MySQLAdsDao implements Ads {
     public List<Ad> all() {
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT ads.id, users.username, ads.title, ads.description, ads.dateMade, ads.catString\n" +
+            stmt = connection.prepareStatement("SELECT ads.id, ads.user_id, users.username, ads.title, ads.description, ads.dateMade, ads.catString\n" +
                     "FROM ads\n" +
                     "JOIN users\n" +
                     "ON users.id = ads.user_id;");
@@ -40,9 +40,10 @@ public class MySQLAdsDao implements Ads {
             while (rs.next()) {
                 Ad newAd = new Ad(
                         rs.getLong("id"),
-                        rs.getString("username"),
+                        rs.getLong("user_id"),
                         rs.getString("title"),
                         rs.getString("description"),
+                        rs.getString("username"),
                         rs.getString("dateMade"),
                         rs.getString("catString")
                 );
@@ -55,13 +56,47 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public List<Ad> selWhile(Long catId) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("SELECT ads.id, ads.user_id, users.username, ads.title, ads.description, ads.dateMade, ads.catString, adCategories.category_id \n" +
+                    "FROM ads\n" +
+                    "JOIN users\n" +
+                    "ON users.id = ads.user_id\n" +
+                    "JOIN adCategories\n" +
+                    "ON adCategories.ad_id = ads.id\n" +
+                    "WHERE category_id = " + catId + ";");
+            ResultSet rs = stmt.executeQuery();
+            List<Ad> allAds = new ArrayList<>();
+            while (rs.next()) {
+                Ad newAd = new Ad(
+                        rs.getLong("id"),
+                        rs.getLong("user_id"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getString("username"),
+                        rs.getString("dateMade"),
+                        rs.getString("catString"),
+                        rs.getLong("category_id")
+                );
+                allAds.add(newAd);
+            }
+            return allAds;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
+    }
+
+    @Override
     public Long insert(Ad ad) {
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO ads(user_id, title, description, dateMade, catString) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
+            stmt.setString(4, ad.getDateMade());
+            stmt.setString(5,ad.getCatString());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
@@ -81,8 +116,6 @@ public class MySQLAdsDao implements Ads {
                 rs.getString("catString")
         );
     }
-
-
 
     @Override
     public List<Ad> getUserAds(Long id) throws SQLException {
