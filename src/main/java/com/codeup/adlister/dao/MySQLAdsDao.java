@@ -172,4 +172,32 @@ public class MySQLAdsDao implements Ads {
         ps.setLong(2, cat_id);
         return ps.executeUpdate();
     }
+
+    @Override
+    public Ad createAdObject(long ad_id) throws SQLException {
+        String query = "SELECT * FROM ads WHERE id = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setLong(1, ad_id);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        Ad newAd = new Ad(
+                rs.getLong("id"),
+                rs.getLong("user_id"),
+                rs.getString("title"),
+                rs.getString("description"),
+                rs.getString("dateMade"),
+                rs.getString("catString")
+        );
+        return newAd;
+    }
+
+    @Override
+    public int updateAd(String title, String description, long ad_id) throws SQLException {
+        String query = "UPDATE ads SET title = ?, description =  ? WHERE id = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, title);
+        ps.setString(2, description);
+        ps.setLong(3, ad_id);
+        return ps.executeUpdate();
+    }
 }
