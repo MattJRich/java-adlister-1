@@ -30,17 +30,18 @@
             <a href="/ads">View all recent</a>
         </form>
 
-        <div class="row pt-1">
-            <div class="col-4">
-                <img style="height: 200px" class="d-block w-100" src="http://media.caranddriver.com/images/17q4/692996/2019-mclaren-senna-hypercar-official-photos-and-info-news-car-and-driver-photo-698055-s-original.jpg" alt="First slide">
-            </div>
-            <div class="col-4">
-                <img style="height: 200px" class="d-block w-100" src="https://www.popsci.com/sites/popsci.com/files/styles/1000_1x_/public/images/2018/03/senna.jpg?itok=eYNPMGjA&fc=50,50" alt="Second slide">
-            </div>
-            <div class="col-4">
-                <img style="height: 200px" class="d-block w-100" src="https://amp.businessinsider.com/images/592f4169b74af41b008b5977-750-563.jpg" alt="Third slide">
-            </div>
-        </div>
+        <c:forEach var="ad" items="${all}">
+
+            <a href="/?adId=${ad.id}">
+                <div style="border: 1px solid grey; display: block; float: left; width: 30%; margin-right: 10px; height: 220px; overflow: hidden;" class="col-md-4">
+                    <h2>${ad.title}</h2>
+                    <p>${ad.description}</p>
+                    <p>Created On: ${ad.dateMade}</p>
+                    <p>Categories: ${ad.catString}</p>
+                </div>
+            </a>
+
+        </c:forEach>
 
         <form class="row pt-4" action="/category" method="GET">
             <a href="/category?value=7">Cars</a>
