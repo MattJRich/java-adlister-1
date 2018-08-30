@@ -56,13 +56,13 @@
                 <h1>Please fill in your information..</h1>
                 <form action="/register" method="post">
                     <c:if test="${bothTaken == true}" >
-                        <p style="color:red;">Both username and email already taken</p>
+                        <p style="color:red;">Both username and email already taken.</p>
                     </c:if>
                     <c:if test="${emailTaken == true}" >
-                        <p style="color:red;">Email already taken</p>
+                        <p style="color:red;">Email already taken.</p>
                     </c:if>
                     <c:if test="${usernameTaken == true}" >
-                        <p style="color:red;">Username already taken</p>
+                        <p style="color:red;">Username already taken. Please select another.</p>
                     </c:if>
                     <div class="form-group">
                         <label for="username">Username</label>

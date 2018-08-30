@@ -19,6 +19,10 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
+
+        // new code added
+        User user = (User) request.getSession().getAttribute("user");
+
         // validate input
         boolean inputHasErrors = username.isEmpty()
                 || email.isEmpty()
@@ -28,11 +32,53 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("/register");
             return;
         }
+
+        // checking both username and email input \\
+        try {
+            boolean usernameAndEmailNotValid = DaoFactory.getUsersDao().validateUsername(username) && DaoFactory.getUsersDao().validateEmail(email);
+            if (usernameAndEmailNotValid){
+                request.setAttribute("bothTaken", true);
+            } else if (boolean usernameNotValid = DaoFactory.getUsersDao().validateUsername(username) {
+                request.setAttribute("usernameTaken", true);
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+
+
+        // make sure username is available \\
+//        try {
+//            boolean usernameNotValid = DaoFactory.getUsersDao().validateUsername(username);
+//              if (usernameNotValid) {
+//                request.setAttribute("usernameTaken", true);
+//                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (ServletException e) {
+//            e.printStackTrace();
+//            throw new RuntimeException("error with username");
+//        }
+
+        // email available check \\
+        try {
+            boolean userEmailNotValid = DaoFactory.getUsersDao().validateEmail(email);
+            if (userEmailNotValid) {
+                request.setAttribute("emailTaken", true);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         // create and save a new user
         try {
             String currentDate = DaoFactory.getAdsDao().getCurrentDate();
             System.out.println(currentDate);
-            User user = new User(username, email, password, currentDate);
+            user = new User(username, email, password, currentDate);
             request.getSession().setAttribute("user", user);
             DaoFactory.getUsersDao().insert(user);
             response.sendRedirect("/profile");
