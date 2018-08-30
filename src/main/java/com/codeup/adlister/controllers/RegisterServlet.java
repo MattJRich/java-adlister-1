@@ -20,7 +20,7 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
-        // new code added
+        // why are we using this?
         User user = (User) request.getSession().getAttribute("user");
 
         // validate input
@@ -33,44 +33,26 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        // checking both username and email input \\
+        // ======== checking username, email & both for validation ======== \\
         try {
             boolean usernameAndEmailNotValid = DaoFactory.getUsersDao().validateUsername(username) && DaoFactory.getUsersDao().validateEmail(email);
+            boolean usernameNotValid = DaoFactory.getUsersDao().validateUsername(username);
+            boolean userEmailNotValid = DaoFactory.getUsersDao().validateEmail(email);
+
             if (usernameAndEmailNotValid){
                 request.setAttribute("bothTaken", true);
-            } else if (boolean usernameNotValid = DaoFactory.getUsersDao().validateUsername(username) {
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            } else if (usernameNotValid) {
                 request.setAttribute("usernameTaken", true);
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            } else if (userEmailNotValid) {
+                request.setAttribute("emailTaken", true);
                 request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ServletException e) {
-            e.printStackTrace();
-        }
-
-
-        // make sure username is available \\
-//        try {
-//            boolean usernameNotValid = DaoFactory.getUsersDao().validateUsername(username);
-//              if (usernameNotValid) {
-//                request.setAttribute("usernameTaken", true);
-//                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ServletException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException("error with username");
-//        }
-
-        // email available check \\
-        try {
-            boolean userEmailNotValid = DaoFactory.getUsersDao().validateEmail(email);
-            if (userEmailNotValid) {
-                request.setAttribute("emailTaken", true);
-            }
-        } catch (SQLException e) {
             e.printStackTrace();
         }
 
