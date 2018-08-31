@@ -6,6 +6,9 @@
         <jsp:param name="title" value="Welcome to my site!" />
     </jsp:include>
     <style>
+        body {
+            background-image: radial-gradient(white, white, #d9e6f2);
+        }
         #container {
             overflow-x: scroll;
             overflow-y: hidden;
@@ -13,10 +16,19 @@
         }
 
         .cardAd {
-            border: 1px solid red;
+            border: 1px solid #f2f2f2;
             display: inline-block;
             height: 250px;
-            word-wrap: break-word;
+            overflow: hidden !important;
+            padding: 25px;
+            margin-right: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            background-image: radial-gradient(white, white, #e6eeff);
+        }
+
+        a:link, a:visited, a:hover {
+            color: black;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -25,8 +37,9 @@
     <div class="container">
         <div class="row pt-4">
             <div class="col-7">
-                <h1 style="font-size:5vw;">Buy, sell, create Ads & Make $</h1>
-                <h4 style="font-size:3vw;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolores earum eius illo itaque iure, iusto labore laborum</h4>
+                <h1>Buy, sell, create Ads & Make $</h1>
+                <%--<h4 style="font-size:3vw;">--%>
+                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolores earum eius illo itaque iure, iusto labore laborum</h4>
             </div>
             <div class="col-5">
                 <div class="card">
@@ -40,23 +53,23 @@
                 </div>
             </div>
         </div>
+
         <form class="row pt-" action="/ads" method="GET">
             <a href="/ads">View all recent</a>
         </form>
         <div id="container">
             <c:forEach var="ad" items="${all}">
                 <a href="/viewAd?adId=${ad.id}">
-                    <div class="cardAd col-md-4" style="word-wrap: break-word;">
+                    <div class="cardAd col-md-4">
                         <h2>${ad.title}</h2>
                         <p>${ad.description}</p>
-                        <p>Created On: ${ad.dateMade} by ${ad.username}</p>
                         <p>Categories: ${ad.catString}</p>
+                        <br>
+                        <p>Created by: ${ad.username} on, ${ad.dateMade} </p>
                     </div>
                 </a>
             </c:forEach>
         </div>
-             <button id="slideBack" type="button">Prev</button>
-             <button id="slide" type="button">Next</button>
 
         <form class="row pt-4" action="/category" method="GET">
             <a href="/category?value=7">Cars</a>
@@ -64,11 +77,12 @@
         <div id="container">
             <c:forEach var="ad" items="${cars}">
                 <a href="/viewAd?adId=${ad.id}">
-                    <div class="cardAd col-md-4" style="word-wrap: break-word;">
+                    <div class="cardAd col-md-4">
                         <h2>${ad.title}</h2>
                         <p>${ad.description}</p>
-                        <p>Created On: ${ad.dateMade}</p>
                         <p>Categories: ${ad.catString}</p>
+                        <br>
+                        <p>Created by: ${ad.username} on, ${ad.dateMade} </p>
                     </div>
                 </a>
             </c:forEach>
@@ -80,11 +94,46 @@
         <div id="container">
             <c:forEach var="ad" items="${computers}">
                 <a href="/viewAd?adId=${ad.id}">
-                    <div class="cardAd col-md-4" style="overflow: hidden;">
+                    <div class="cardAd col-md-4">
                         <h2>${ad.title}</h2>
                         <p>${ad.description}</p>
-                        <p>Created On: ${ad.dateMade}</p>
                         <p>Categories: ${ad.catString}</p>
+                        <br>
+                        <p>Created by: ${ad.username} on, ${ad.dateMade} </p>
+                    </div>
+                </a>
+            </c:forEach>
+        </div>
+
+        <form class="row pt-4" action="/category" method="GET">
+            <a href="/category?value=3">Computers</a>
+        </form>
+        <div id="container">
+            <c:forEach var="ad" items="${computers}">
+                <a href="/viewAd?adId=${ad.id}">
+                    <div class="cardAd col-md-4">
+                        <h2>${ad.title}</h2>
+                        <p>${ad.description}</p>
+                        <p>Categories: ${ad.catString}</p>
+                        <br>
+                        <p>Created by: ${ad.username} on, ${ad.dateMade} </p>
+                    </div>
+                </a>
+            </c:forEach>
+        </div>
+
+        <form class="row pt-4" action="/category" method="GET">
+            <a href="/category?value=3">Computers</a>
+        </form>
+        <div id="container">
+            <c:forEach var="ad" items="${computers}">
+                <a href="/viewAd?adId=${ad.id}">
+                    <div class="cardAd col-md-4">
+                        <h2>${ad.title}</h2>
+                        <p>${ad.description}</p>
+                        <p>Categories: ${ad.catString}</p>
+                        <br>
+                        <p>Created by: ${ad.username} on, ${ad.dateMade} </p>
                     </div>
                 </a>
             </c:forEach>
@@ -102,35 +151,6 @@
         <%--</div>--%>
 
         <%-- ALL OTHER PAGES NEED THIS TAG--%>
-        <script>
-            // JS for scroll left and right
-            var button = document.getElementById('slide');
-            button.onclick = function () {
-                var container = document.getElementById('container');
-                sideScroll(container,'right',25,100,10);
-            }
-​
-            var back = document.getElementById('slideBack');
-            back.onclick = function () {
-                var container = document.getElementById('container');
-                sideScroll(container,'left',25,100,10);
-            };
-
-            function sideScroll(element,direction,speed,distance,step){
-                scrollAmount = 0;
-                var slideTimer = setInterval(function(){
-                    if(direction == 'left'){
-                        element.scrollLeft -= step;
-                    } else {
-                        element.scrollLeft += step;
-                    }
-                    scrollAmount += step;
-                    if(scrollAmount >= distance){
-                        window.clearInterval(slideTimer);
-                    }
-                }, speed);
-            }
-        </script>
         <jsp:include page="WEB-INF/partials/js-script.jsp" />
 
         <footer class="pt-4 pb-4">

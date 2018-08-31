@@ -1,0 +1,6 @@
+.shadow {
+    /*box-shadow: 10px 10px 5px #aaaaaa;*/
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+    box-shadow: 3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+
+}
