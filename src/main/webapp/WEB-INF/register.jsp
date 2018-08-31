@@ -5,55 +5,18 @@
     <jsp:include page="partials/head.jsp">
         <jsp:param name="title" value="Register For Our Site!" />
     </jsp:include>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/register.css">
 
-    <style>
-        #red {
-            color: red;
-        }
-        /* The message box is shown when the user clicks on the password field */
-        #message {
-            display:none;
-            background: #f1f1f1;
-            color: #000;
-            position: relative;
-            padding: 20px;
-            margin-top: 10px;
-        }
 
-        #message p {
-            padding: 10px 35px;
-            font-size: 18px;
-        }
-
-        /* Add a green text color and a checkmark when the requirements are right */
-        .valid {
-            color: green;
-        }
-
-        .valid:before {
-            position: relative;
-            left: -35px;
-            content: "✔";
-        }
-
-        /* Add a red text color and an "x" when the requirements are wrong */
-        .invalid {
-            color: red;
-        }
-
-        .invalid:before {
-            position: relative;
-            left: -35px;
-            content: "✖";
-        }
-    </style>
 </head>
 <body>
     <jsp:include page="partials/navbar.jsp" />
     <div class="container">
         <div class="row">
             <div class="col-7">
-                <h1>Please fill in your information..</h1>
+                <h1 class="headingRegister">Please fill in your information.</h1>
                 <form action="/register" method="post">
                     <c:if test="${bothTaken == true}" >
                         <p style="color:red;">Both username and email already taken. Please try again.</p>
@@ -64,24 +27,26 @@
                     <c:if test="${usernameTaken == true}" >
                         <p style="color:red;">Username not available. Please try again.</p>
                     </c:if>
+                    <div class="registerDiv">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input id="username" name="username" class="form-control" type="text" pattern="[A-Za-z0-9].{1, }" value="${username}" required>
+                        <input id="username" name="username" class="form-control registerInput" type="text" pattern="[A-Za-z0-9].{1, }" value="${username}" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input id="email" name="email" class="form-control" type="email" value="${email}" required>
+                        <input id="email" name="email" class="form-control registerInput" type="email" value="${email}" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <%--<input id="password" name="password" class="form-control" type="password" pattern="[A-Za-z0-9].{6,}" required>--%>
-                        <input id="password" name="password" class="form-control" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" required>
+                        <input id="password" name="password" class="form-control registerInput" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" required>
                     </div>
                     <div class="form-group">
                         <label for="confirm_password">Confirm Password</label>
-                        <input id="confirm_password" name="confirm_password" class="form-control" type="password" required>
+                        <input id="confirm_password" name="confirm_password" class="form-control registerInput" type="password" required>
                     </div>
-                    <input type="submit" class="btn btn-primary btn-block">
+                    <input type="submit" class="btn registerBtn btn-block">
+                    </div>
                 </form>
             </div>
 
