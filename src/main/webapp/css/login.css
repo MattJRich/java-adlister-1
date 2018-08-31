@@ -3,13 +3,16 @@
     border-radius: 2em;
     box-shadow: 0 .3em .7em black;
     background-color: var(--primary-red);
+    color: var(--light-grey);
 }
 
-body {
-    background-color: var(--primary-dark);
+
+
+.loginHeading {
+    color: var(--light-grey);
+    text-align: center;
 }
 
-.loginBtn {
-    background-color: var(--seconday-green);
-    box-shadow: 0 .3em .5em black;
+.loginBtn, .loginInput {
+    box-shadow: 0 .3em .7em black;
 }
