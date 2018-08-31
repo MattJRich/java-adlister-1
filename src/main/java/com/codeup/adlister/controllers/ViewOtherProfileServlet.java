@@ -20,19 +20,46 @@ public class ViewOtherProfileServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            User user = DaoFactory.getUsersDao().findByUsername(request.getParameter("username"));
-            long userId = user.getId();
-            request.setAttribute("user", user);
-            List<Ad> userAds = DaoFactory.getAdsDao().getUserAds(userId);
+        if (request.getSession().getAttribute("user") == null) {
+            try {
+                User user = DaoFactory.getUsersDao().findByUsername(request.getParameter("username"));
+                long userId = user.getId();
+                request.setAttribute("user", user);
+                List<Ad> userAds = DaoFactory.getAdsDao().getUserAds(userId);
 
-            int numberOfAds = userAds.size();
-            request.setAttribute("userAds", userAds);
-            request.setAttribute("numberOfAds", numberOfAds);
-            request.getRequestDispatcher("/WEB-INF/viewOtherProfile.jsp").forward(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
+                int numberOfAds = userAds.size();
+                request.setAttribute("userAds", userAds);
+                request.setAttribute("numberOfAds", numberOfAds);
+                request.getRequestDispatcher("/WEB-INF/viewOtherProfile.jsp").forward(request, response);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            String username = request.getParameter("username");
+            User currentUser = (User) request.getSession().getAttribute("user");
+            String currentUsername = currentUser.getUsername();
+            if (username.equals(currentUsername)) {
+                response.sendRedirect("/profile");
+            } else {
+                try {
+                    User user = DaoFactory.getUsersDao().findByUsername(request.getParameter("username"));
+                    long userId = user.getId();
+                    request.setAttribute("user", user);
+                    List<Ad> userAds = DaoFactory.getAdsDao().getUserAds(userId);
+
+                    int numberOfAds = userAds.size();
+                    request.setAttribute("userAds", userAds);
+                    request.setAttribute("numberOfAds", numberOfAds);
+                    request.getRequestDispatcher("/WEB-INF/viewOtherProfile.jsp").forward(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
         }
+
 
     }
 }

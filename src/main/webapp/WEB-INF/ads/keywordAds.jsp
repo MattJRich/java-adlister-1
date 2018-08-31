@@ -17,10 +17,10 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <c:if test="${noResults == true}" >
-        <p>We couldn't find any results for ${keyword}</p>
+        <p>We couldn't find any results for <c:out value="${keyword}"/></p>
     </c:if>
     <c:if test="${noResults == false}" >
-        <h1>All ads related to ${keyword}</h1>
+        <h1>All ads related to <c:out value="${keyword}" /></h1>
         <c:forEach var="ad" items="${ads}" >
             <a href="/viewAd?adId=${ad.id}">
                 <div class="cardAd col-md-4" style="word-wrap: break-word;">
