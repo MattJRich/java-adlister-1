@@ -12,8 +12,9 @@
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <h1>${ad.title}</h1>
     <p>${ad.description}</p>
-    <p>Created by ${ad.username} on ${ad.dateMade}</p>
+    <p>Posted on ${ad.dateMade}</p>
     <p>Categories: ${ad.catString}</p>
+    <span>Posted by: </span><a href="viewOtherProfile?username=${ad.username}">${ad.username}</a>
 
 </body>
 </html>

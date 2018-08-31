@@ -9,6 +9,9 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="container-fluid">
+    <c:if test="${deleteSuccess == true}" >
+        <h3 style="color: green">Ad was deleted successfully!</h3>
+    </c:if>
     <h1>Welcome, ${sessionScope.user.username}!</h1>
     <div class="row">
         <div class="col-12">
@@ -18,11 +21,10 @@
                     <p class="card-text">Email: ${sessionScope.user.email}</p>
                     <%-- find when user was created, and create method to count number of days as a contributing member --%>
                     <p class="card-text">Member since: ${sessionScope.user.date}</p>
-                    <p class="card-text">Number of posted ads:</p>
+                    <p class="card-text">Number of posted ads: ${numberOfAds}</p>
                     <%--can include number of ads posted by running query search to pull all ads from user,
                      then check the number of ads posted to each category. The number with most is most popular
                     --%>
-                    <p class="card-text">Most frequently posted to:</p>
                     <form action="/profile/edit" method="GET">
                         <a href="/profile/edit" class="btn btn-primary" type="submit">Update/Edit</a>
                     </form>
@@ -30,13 +32,16 @@
             </div>
             <c:forEach var="ad" items="${sessionScope.userAds}" >
                 <div class="card w-50 mb-2">
+                    <a href="/viewAd?adId=${ad.id}">
                     <div class="card-body">
                         <h3>${ad.title}</h3>
                         <p class="card-text">${ad.description}</p>
                         <p class="card-text"><small class="text-muted">posted on: ${ad.dateMade}</small></p>
                         <p class="card-text"><small class="text-muted">categories: ${ad.catString}</small></p>
                     </div>
+                    </a>
                     <button><a href="/editAd?adId=${ad.id}">Edit Ad</a></button>
+                    <button><a href="/deleteAd?adId=${ad.id}">Delete Ad</a></button>
                 </div>
 
 

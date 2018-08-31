@@ -19,7 +19,7 @@ public class editAdServlet extends HttpServlet {
          String description = request.getParameter("description");
         try {
             System.out.println(DaoFactory.getAdsDao().updateAd(title, description, id));
-            response.sendRedirect("/profile");
+            request.getRequestDispatcher("/WEB-INF/ads/AdUpdated.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
         }

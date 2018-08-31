@@ -96,7 +96,7 @@ public class MySQLAdsDao implements Ads {
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
             stmt.setString(4, ad.getDateMade());
-            stmt.setString(5,ad.getCatString());
+            stmt.setString(5, ad.getCatString());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
@@ -142,7 +142,7 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public String getCurrentDate() throws SQLException {
-        String query =  "SELECT CURRENT_DATE AS date";
+        String query = "SELECT CURRENT_DATE AS date";
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         rs.next();
@@ -202,5 +202,44 @@ public class MySQLAdsDao implements Ads {
         ps.setString(2, description);
         ps.setLong(3, ad_id);
         return ps.executeUpdate();
+    }
+
+    @Override
+    public int deleteAdFromAdTable(long ad_id) throws SQLException {
+        String query = "DELETE FROM ads WHERE id = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setLong(1, ad_id);
+        return ps.executeUpdate();
+    }
+
+    public int deleteAdFromAdCategories(long ad_id) throws SQLException {
+        String query = "DELETE FROM adCategories WHERE ad_id = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setLong(1, ad_id);
+        return ps.executeUpdate();
+    }
+
+    public List<Ad> findAdByKeyword(String keyword) throws SQLException {
+        String query = "SELECT *, users.username FROM ads\n" +
+                "JOIN users\n" +
+                "ON users.id = ads.user_id\n" +
+                "WHERE ads.title LIKE ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, "%" + keyword + "%");
+        ResultSet rs = ps.executeQuery();
+        List<Ad> keywordAds = new ArrayList<>();
+        while (rs.next()) {
+            Ad newAd = new Ad(
+                    rs.getLong("id"),
+                    rs.getString("title"),
+                    rs.getString("description"),
+                    rs.getString("username"),
+                    rs.getString("dateMade"),
+                    rs.getString("catString")
+            );
+            keywordAds.add(newAd);
+
+        }
+        return keywordAds;
     }
 }
