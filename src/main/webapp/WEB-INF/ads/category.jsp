@@ -6,6 +6,7 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Welcome to my site!" />
     </jsp:include>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
     <title>Category Ads</title>
 </head>
 <body>
