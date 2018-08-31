@@ -92,8 +92,8 @@
     <form action="/profile" method="GET">
         <button class="btn btn-primary" type="submit">View Profile</button>
     </form>
-    <form action="/ads" method="GET">
-        <button class="btn btn-primary" type="submit">View All Ads</button>
+    <form action="/home" method="GET">
+        <button class="btn btn-primary" type="submit">Go to home page</button>
     </form>
 
 <jsp:include page="partials/js-script.jsp" />

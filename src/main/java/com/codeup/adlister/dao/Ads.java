@@ -25,6 +25,11 @@ public interface Ads {
 
     int updateAd(String title, String description, long ad_id) throws SQLException;
 
+    int deleteAdFromAdTable(long ad_id) throws SQLException;
+
+    int deleteAdFromAdCategories(long ad_id) throws SQLException;
+    List<Ad> findAdByKeyword(String keyword) throws SQLException;
+
 
 
 

@@ -45,11 +45,11 @@
         </form>
         <div id="container">
             <c:forEach var="ad" items="${all}">
-                <a href="/?adId=${ad.id}">
+                <a href="/viewAd?adId=${ad.id}">
                     <div class="cardAd col-md-4" style="word-wrap: break-word;">
                         <h2>${ad.title}</h2>
                         <p>${ad.description}</p>
-                        <p>Created On: ${ad.dateMade}</p>
+                        <p>Created On: ${ad.dateMade} by ${ad.username}</p>
                         <p>Categories: ${ad.catString}</p>
                     </div>
                 </a>
@@ -63,7 +63,7 @@
         </form>
         <div id="container">
             <c:forEach var="ad" items="${cars}">
-                <a href="/?adId=${ad.id}">
+                <a href="/viewAd?adId=${ad.id}">
                     <div class="cardAd col-md-4" style="word-wrap: break-word;">
                         <h2>${ad.title}</h2>
                         <p>${ad.description}</p>
@@ -79,7 +79,7 @@
         </form>
         <div id="container">
             <c:forEach var="ad" items="${computers}">
-                <a href="/?adId=${ad.id}">
+                <a href="/viewAd?adId=${ad.id}">
                     <div class="cardAd col-md-4" style="overflow: hidden;">
                         <h2>${ad.title}</h2>
                         <p>${ad.description}</p>

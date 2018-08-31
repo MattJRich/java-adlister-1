@@ -53,6 +53,6 @@ public class CreateAdServlet extends HttpServlet {
         }
 
 
-        response.sendRedirect("/ads");
+        response.sendRedirect("/profile");
     }
 }
