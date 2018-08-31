@@ -26,20 +26,8 @@ body {
 }
 
 .grid {
-    /*overflow: auto !important;*/
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    overflow: auto;
 }
 
-
-/*.cardCat {*/
-    /*overflow: auto !important;*/
-    /*margin-right: 10px;*/
-    /*width: 30%;*/
-    /*overflow: auto;*/
-/*}*/
-/*.edit-btn {*/
-
-/*}*/

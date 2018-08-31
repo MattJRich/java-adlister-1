@@ -29,22 +29,46 @@
             <h2 class="ads-title text-center" style="color: white;">My Ads</h2>
             <hr>
 
-            <c:forEach var="ad" items="${sessionScope.userAds}" >
-                <div class="card w-50 mb-2 adCards">
-                    <a href="/viewAd?adId=${ad.id}">
-                    <div class="card-body">
-                        <h3>${ad.title}</h3>
-                        <p class="card-text">${ad.description}</p>
-                        <p class="card-text"><small class="text-muted">posted on: ${ad.dateMade}</small></p>
-                        <p class="card-text"><small class="text-muted">categories: ${ad.catString}</small></p>
-                    </div>
-                    </a>
-                    <button class="btn btn-success"><a href="/editAd?adId=${ad.id}">Edit Ad</a></button>
-                    <button class="btn btn-warning"><a href="/deleteAd?adId=${ad.id}">Delete Ad</a></button>
-                </div>
+        <div class="container">
+                <c:forEach var="ad" items="${sessionScope.userAds}" >
+                    <%--<div class="grid">--%>
+                    <%--<div class="card mb-2 adCards">--%>
+                        <a href="/viewAd?adId=${ad.id}">
+                            <%--<div class="card-body">--%>
+                                <div style="border: 1px solid grey; display: block; float: left; width: 30%; margin-right: 10px; height: 250px;" class="col-md-4">
+                            <h3>${ad.title}</h3>
+                            <p class="card-text">${ad.description}</p>
+                            <p class="card-text"><small class="text-muted">posted on: ${ad.dateMade}</small></p>
+                            <p class="card-text"><small class="text-muted">categories: ${ad.catString}</small></p>
+                            <a href="/editAd?adId=${ad.id}" class="btn btn-primary edit-btn">Edit Ad</a>
+                            <a href="/deleteAd?adId=${ad.id}" class="btn btn-warning delete-btn">Delete Ad</a>
+                            </div>
+                        </a>
+
+                    <%--</div>--%>
+                    <%--</div>--%>
+                </c:forEach>
+            </div>
 
 
-            </c:forEach>
+
+        </div>
+
+
+            <%--<c:forEach var="ad" items="${sessionScope.userAds}" >--%>
+                <%--<div class="card w-50 mb-2 adCards">--%>
+                    <%--<a href="/viewAd?adId=${ad.id}">--%>
+                    <%--<div class="card-body">--%>
+                        <%--<h3>${ad.title}</h3>--%>
+                        <%--<p class="card-text">${ad.description}</p>--%>
+                        <%--<p class="card-text"><small class="text-muted">posted on: ${ad.dateMade}</small></p>--%>
+                        <%--<p class="card-text"><small class="text-muted">categories: ${ad.catString}</small></p>--%>
+                    <%--</div>--%>
+                    <%--</a>--%>
+                    <%--<button class="btn btn-success"><a href="/editAd?adId=${ad.id}">Edit Ad</a></button>--%>
+                    <%--<button class="btn btn-warning"><a href="/deleteAd?adId=${ad.id}">Delete Ad</a></button>--%>
+                <%--</div>--%>
+            <%--</c:forEach>--%>
         </div>
     </div>
 </div>
