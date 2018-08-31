@@ -27,16 +27,22 @@ public class editAdServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            long adId = Long.parseLong(request.getParameter("adId"));
-            System.out.println(adId);
-            Ad adObject = DaoFactory.getAdsDao().createAdObject(adId);
-            System.out.println(adObject.getTitle());
-            request.setAttribute("ad", adObject);
-            request.getRequestDispatcher("/WEB-INF/UserAd.jsp").forward(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (request.getSession().getAttribute("user") != null) {
+            try {
+                long adId = Long.parseLong(request.getParameter("adId"));
+                System.out.println(adId);
+                Ad adObject = DaoFactory.getAdsDao().createAdObject(adId);
+                System.out.println(adObject.getTitle());
+                request.setAttribute("ad", adObject);
+                request.getRequestDispatcher("/WEB-INF/UserAd.jsp").forward(request, response);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            response.sendRedirect("/profile");
         }
+
 
 
     }

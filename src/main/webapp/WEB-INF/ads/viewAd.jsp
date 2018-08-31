@@ -15,6 +15,11 @@
     <p>Posted on ${ad.dateMade}</p>
     <p>Categories: ${ad.catString}</p>
     <span>Posted by: </span><a href="viewOtherProfile?username=${ad.username}">${ad.username}</a>
+    <c:if test="${belongsToUser == true}" >
+        <br>
+        <button><a href="/editAd?adId=${ad.id}">Edit Ad</a></button>
+        <button><a href="/deleteAd?adId=${ad.id}">Delete Ad</a></button>
+    </c:if>
 
 </body>
 </html>
