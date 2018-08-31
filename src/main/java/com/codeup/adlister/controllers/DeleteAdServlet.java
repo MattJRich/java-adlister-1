@@ -16,14 +16,19 @@ public class DeleteAdServlet extends HttpServlet {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       long adId = Long.parseLong(request.getParameter("adId"));
-        try {
-            System.out.println(DaoFactory.getAdsDao().deleteAdFromAdCategories(adId));
-            System.out.println(DaoFactory.getAdsDao().deleteAdFromAdTable(adId));
-            request.getRequestDispatcher("/WEB-INF/ads/deletedAd.jsp").forward(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("user") != null) {
+            long adId = Long.parseLong(request.getParameter("adId"));
+            try {
+                System.out.println(DaoFactory.getAdsDao().deleteAdFromAdCategories(adId));
+                System.out.println(DaoFactory.getAdsDao().deleteAdFromAdTable(adId));
+                request.getRequestDispatcher("/WEB-INF/ads/deletedAd.jsp").forward(request, response);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            response.sendRedirect("/login");
         }
 
 
