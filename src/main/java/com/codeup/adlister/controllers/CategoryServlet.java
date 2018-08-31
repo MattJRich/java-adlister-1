@@ -25,6 +25,10 @@ public class CategoryServlet extends HttpServlet {
         List<Ad> userAds = DaoFactory.getAdsDao().all(); // List all ads
         List<String> sortedAd = new ArrayList<>();
         for (Ad info: userAds) {
+            if ("0".equalsIgnoreCase(category)) {
+                request.setAttribute("catAd", DaoFactory.getAdsDao().all());
+            }
+
             if ("1".equalsIgnoreCase(category)) {
                 // System.out.println(info.getCatString());
                 if(info.getCatString().toLowerCase().contains("sports")){

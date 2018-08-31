@@ -24,6 +24,13 @@ public class HelloWorldServlet extends HttpServlet {
 
         // List Computers ads
         request.setAttribute("computers", DaoFactory.getAdsDao().selWhile((long) 3));
+
+        // Jobs
+        request.setAttribute("jobs", DaoFactory.getAdsDao().selWhile((long) 5));
+
+        // Furniture
+        request.setAttribute("furniture", DaoFactory.getAdsDao().selWhile((long) 8));
+
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }
