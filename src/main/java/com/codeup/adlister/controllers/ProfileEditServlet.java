@@ -33,10 +33,51 @@ public class ProfileEditServlet extends HttpServlet {
         String newPassword = request.getParameter("newPassword");
         String confirmNewPassword = request.getParameter("confirmNewPassword");
 
+
         User user = (User) request.getSession().getAttribute("user");
         long id = user.getId();
         String currentPassword = user.getPassword();
         String currentUsername = user.getUsername();
+
+        System.out.println("old password is :" + password);
+        System.out.println("newPassword password is :" + newPassword);
+        System.out.println("confirmNewPassword password is :" + confirmNewPassword);
+
+
+
+// ================== password update logic (moved this to the top, and was able to work correctly================== \\
+        if (username == null && email == null) {
+            if (Password.check(password, currentPassword)) {
+                request.setAttribute("passwordsMatch", true);
+
+                if (!newPassword.equals(confirmNewPassword)) {
+                    request.setAttribute("newPasswordMatch", false);
+                    request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
+                    System.out.println("DOESNT MATCH");
+                } else {
+
+                    try {
+                        System.out.println(" new password to before hash: " + newPassword);
+                        request.setAttribute("passwordChangeSuccess", true);
+                        String newPasswordHash = Password.hash(newPassword);
+                        DaoFactory.getUsersDao().updatePassword(newPasswordHash, id);
+                        request.getSession().removeAttribute("user");
+                        User newUser = DaoFactory.getUsersDao().findByUsername(currentUsername);
+                        request.getSession().setAttribute("user", newUser);
+                        request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
+
+                    } catch (SQLIntegrityConstraintViolationException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            } else {
+                request.setAttribute("passwordsMatch", false);
+                request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
+            }
+        }
+
+
 
         // ================== username update logic ================== \\
             if (email == null) {
@@ -79,37 +120,38 @@ public class ProfileEditServlet extends HttpServlet {
                 }
             }
 
-        // ================== password update logic ================== \\
-        if (username == null && email == null) {
-            if (Password.check(password, currentPassword)) {
-                request.setAttribute("passwordsMatch", true);
 
-                if (!newPassword.equals(confirmNewPassword)) {
-                    request.setAttribute("newPasswordMatch", false);
-                    request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
-                    System.out.println("DOESNT MATCH");
-                } else {
-
-                    try {
-                        System.out.println(" new password to before hash: " + newPassword);
-                        request.setAttribute("passwordChangeSuccess", true);
-                        String newPasswordHash = Password.hash(newPassword);
-                        DaoFactory.getUsersDao().updatePassword(newPasswordHash, id);
-                        request.getSession().removeAttribute("user");
-                        User newUser = DaoFactory.getUsersDao().findByUsername(currentUsername);
-                        request.getSession().setAttribute("user", newUser);
-                        request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
-
-                    } catch (SQLIntegrityConstraintViolationException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            } else {
-                request.setAttribute("passwordsMatch", false);
-                request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
-            }
-        }
+//        // ================== password update logic ================== \\
+//        if (username == null && email == null) {
+//            if (Password.check(password, currentPassword)) {
+//                request.setAttribute("passwordsMatch", true);
+//
+//                if (!newPassword.equals(confirmNewPassword)) {
+//                    request.setAttribute("newPasswordMatch", false);
+//                    request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
+//                    System.out.println("DOESNT MATCH");
+//                } else {
+//
+//                    try {
+//                        System.out.println(" new password to before hash: " + newPassword);
+//                        request.setAttribute("passwordChangeSuccess", true);
+//                        String newPasswordHash = Password.hash(newPassword);
+//                        DaoFactory.getUsersDao().updatePassword(newPasswordHash, id);
+//                        request.getSession().removeAttribute("user");
+//                        User newUser = DaoFactory.getUsersDao().findByUsername(currentUsername);
+//                        request.getSession().setAttribute("user", newUser);
+//                        request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
+//
+//                    } catch (SQLIntegrityConstraintViolationException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//            } else {
+//                request.setAttribute("passwordsMatch", false);
+//                request.getRequestDispatcher("/WEB-INF/profileEdit.jsp").forward(request, response);
+//            }
+//        }
     }
 }
 
