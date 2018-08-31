@@ -5,31 +5,9 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Welcome to my site!" />
     </jsp:include>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <style>
-        body {
-            background-image: radial-gradient(white, white, #d9e6f2);
-        }
-        #container {
-            overflow-x: scroll;
-            overflow-y: hidden;
-            white-space: nowrap;
-        }
 
-        .cardAd {
-            border: 1px solid #f2f2f2;
-            display: inline-block;
-            height: 250px;
-            overflow: hidden !important;
-            padding: 25px;
-            margin-right: 20px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            background-image: radial-gradient(white, white, #e6eeff);
-        }
-
-        a:link, a:visited, a:hover {
-            color: black;
-            text-decoration: none;
-        }
     </style>
 </head>
 <body>
@@ -55,7 +33,7 @@
         </div>
 
         <form class="row pt-" action="/ads" method="GET">
-            <a href="/ads">View all recent</a>
+            <a href="/category?value=0">View all recent</a>
         </form>
         <div id="container">
             <c:forEach var="ad" items="${all}">
@@ -106,10 +84,10 @@
         </div>
 
         <form class="row pt-4" action="/category" method="GET">
-            <a href="/category?value=3">Computers</a>
+            <a href="/category?value=5">Jobs</a>
         </form>
         <div id="container">
-            <c:forEach var="ad" items="${computers}">
+            <c:forEach var="ad" items="${jobs}">
                 <a href="/viewAd?adId=${ad.id}">
                     <div class="cardAd col-md-4">
                         <h2>${ad.title}</h2>
@@ -123,10 +101,10 @@
         </div>
 
         <form class="row pt-4" action="/category" method="GET">
-            <a href="/category?value=3">Computers</a>
+            <a href="/category?value=8">Furniture</a>
         </form>
         <div id="container">
-            <c:forEach var="ad" items="${computers}">
+            <c:forEach var="ad" items="${furniture}">
                 <a href="/viewAd?adId=${ad.id}">
                     <div class="cardAd col-md-4">
                         <h2>${ad.title}</h2>

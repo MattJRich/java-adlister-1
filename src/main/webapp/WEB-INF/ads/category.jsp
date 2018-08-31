@@ -15,7 +15,7 @@
         <div class="col-2 bg-light h-100 pt-4">
             <div class="container">
                 <nav class="nav flex-column">
-                    <a class="nav-link active" href="/category">All</a>
+                    <a class="nav-link active" href="/category?value=0">All</a>
                     <a class="nav-link" href="/category?value=1">Sports</a>
                     <a class="nav-link" href="/category?value=2">Camping</a>
                     <a class="nav-link" href="/category?value=3">Computers</a>
@@ -46,7 +46,6 @@
                             </a>
 
                     </c:forEach>
-
             </div>
         </div>
 
