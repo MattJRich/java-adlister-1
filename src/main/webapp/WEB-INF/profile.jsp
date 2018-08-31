@@ -5,6 +5,7 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Your Profile" />
     </jsp:include>
+    <link rel="stylesheet" href="../css/profile.css" >
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
@@ -12,26 +13,24 @@
     <c:if test="${deleteSuccess == true}" >
         <h3 style="color: green">Ad was deleted successfully!</h3>
     </c:if>
-    <h1>Welcome, ${sessionScope.user.username}!</h1>
+    <h1 class="welcome-msg">Welcome back, ${sessionScope.user.username}!</h1>
     <div class="row">
         <div class="col-12">
-            <div class="card w-50 mb-5">
-                <div class="card-body">
+            <div class="card mb-5" style="width: 25rem;">
+                <div class="card-body account-info">
                     <h5 class="card-title"><i class="fas fa-user-circle fa-2x"></i>Account Details:</h5>
-                    <p class="card-text">Email: ${sessionScope.user.email}</p>
-                    <%-- find when user was created, and create method to count number of days as a contributing member --%>
-                    <p class="card-text">Member since: ${sessionScope.user.date}</p>
+                    <p class="card-text">e: ${sessionScope.user.email}</p>
+                    <p class="card-text">Member since: <strong>${sessionScope.user.date}</strong></p>
                     <p class="card-text">Number of posted ads: ${numberOfAds}</p>
-                    <%--can include number of ads posted by running query search to pull all ads from user,
-                     then check the number of ads posted to each category. The number with most is most popular
-                    --%>
-                    <form action="/profile/edit" method="GET">
-                        <a href="/profile/edit" class="btn btn-primary" type="submit">Update/Edit</a>
-                    </form>
+                    <a href="/profile/edit" class="btn btn-primary text-center">Update/Edit</a></button>
                 </div>
             </div>
+            <%-- My Ads Title--%>
+            <h2 class="ads-title text-center" style="color: white;">My Ads</h2>
+            <hr>
+
             <c:forEach var="ad" items="${sessionScope.userAds}" >
-                <div class="card w-50 mb-2">
+                <div class="card w-50 mb-2 adCards">
                     <a href="/viewAd?adId=${ad.id}">
                     <div class="card-body">
                         <h3>${ad.title}</h3>
@@ -40,8 +39,8 @@
                         <p class="card-text"><small class="text-muted">categories: ${ad.catString}</small></p>
                     </div>
                     </a>
-                    <button><a href="/editAd?adId=${ad.id}">Edit Ad</a></button>
-                    <button><a href="/deleteAd?adId=${ad.id}">Delete Ad</a></button>
+                    <button class="btn btn-success"><a href="/editAd?adId=${ad.id}">Edit Ad</a></button>
+                    <button class="btn btn-warning"><a href="/deleteAd?adId=${ad.id}">Delete Ad</a></button>
                 </div>
 
 
